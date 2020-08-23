@@ -1,5 +1,7 @@
 package com.example.taskapp.ui.home;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +45,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public void setElement(int position, Task task) {
-        tasks.set(position, task);
-        notifyDataSetChanged();
-    }
-
-    public void deleteElement(int position) {
-        tasks.remove(position);
-        notifyDataSetChanged();
-    }
 
     @Override
     public int getItemCount() {
@@ -81,11 +74,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 }
             });
         }
-
-
+        @SuppressLint("ResourceAsColor")
         public void bind(Task task, int position) {
             this.position = position;
             textView.setText(task.getTitle());
+            if (task.getTitle().length() > 5) {
+                textView.setTextColor(Color.RED);
+            }
             time.setText(getDate(task.getCreatedAt()));
             timeUpDate.setText(getUpDate(task.getUpdateAt()));
         }
