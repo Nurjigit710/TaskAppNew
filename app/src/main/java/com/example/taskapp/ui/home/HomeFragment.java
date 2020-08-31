@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +33,8 @@ public class HomeFragment extends Fragment {
     ArrayList<Task> list;
     boolean isSortAlp, isSortDate;
     private int currentPos;
+    private TextView tvSelectedChoices;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -56,7 +59,6 @@ public class HomeFragment extends Fragment {
         initList(view);
     }
 
-
     private void initList(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         list = new ArrayList<>();
@@ -68,6 +70,7 @@ public class HomeFragment extends Fragment {
                 taskAdapter.notifyDataSetChanged();
             }
         });
+
         taskAdapter = new TaskAdapter(list);
         recyclerView.setAdapter(taskAdapter);
         taskAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -98,7 +101,6 @@ public class HomeFragment extends Fragment {
         });
         builder.show();
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -140,11 +142,12 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void openForm(Task task) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("task", task);
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.action_navigation_home_to_formFragment, bundle);
     }
+
+
 }

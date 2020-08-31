@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TaskApp</string>
     <string name="title_home">Задача</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Chats</string>
     <string name="title_notifications">Notifications</string>
     <string name="save_data">Удалить данные?</string>
     <string name="yes">Удалить</string>
@@ -10,4 +10,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="Skip">skip</string>
+
+
+    <string-array name="choice_items">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 </resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "421354855898",
+    "firebase_url": "https://taksapp-cc99b.firebaseio.com",
+    "project_id": "taksapp-cc99b",
+    "storage_bucket": "taksapp-cc99b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421354855898:android:8f9b60f227774d0c47f4e3",
+        "android_client_info": {
+          "package_name": "com.example.taskapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421354855898-njdnndeiahilgas98ast2ffp9crjh392.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlUUDxM7bqV-_-RsQYW8MeYhEjyKOsM3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421354855898-njdnndeiahilgas98ast2ffp9crjh392.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

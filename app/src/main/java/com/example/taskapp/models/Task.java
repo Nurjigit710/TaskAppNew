@@ -8,9 +8,11 @@ import java.io.Serializable;
 @Entity
 public class Task implements Serializable {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String title;
+
+
     private long createdAt;
     private long updateAt;
 
@@ -18,6 +20,7 @@ public class Task implements Serializable {
         this.title = title;
         this.createdAt = createdAt;
     }
+
 
     public long getUpdateAt() {
         return updateAt;
