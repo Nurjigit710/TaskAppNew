@@ -1,11 +1,6 @@
 package com.example.taskapp.ui.auth;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -15,7 +10,25 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.taskapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class PhoneFragment extends Fragment {
@@ -61,8 +74,8 @@ public class PhoneFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("phone", s);
                     getParentFragmentManager().setFragmentResult("phone2", bundle);
-                    NavController navController = Navigation.findNavController( requireActivity(), R.id.nav_host_fragment);
-//                    navController.navigate(R.id.action_phoneFragment_to_codeFragment);
+                    NavController navController = Navigation.findNavController( requireActivity(),R.id.nav_host_fragment);
+                    navController.navigate(R.id.action_phoneFragment_to_codeFragment);
                 }
             }
         });

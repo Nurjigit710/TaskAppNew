@@ -1,6 +1,16 @@
 package com.example.taskapp.ui.auth;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,13 +19,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.example.taskapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,7 +60,7 @@ public class CodeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         textView = view.findViewById(R.id.timeCounter);
-        countDownTimer = new CountDownTimer(15000, 1000) {
+        countDownTimer = new CountDownTimer(45000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 textView.setText("Отправить код ещё раз: " + millisUntilFinished / 1000);
@@ -89,7 +92,7 @@ public class CodeFragment extends Fragment {
             public void onClick(View view) {
                 String code = editText.getText().toString().trim();
                 if (code.isEmpty() ) {
-                    editText.setError("Enter code...");
+                    editText.setError("Введите код...");
                     editText.requestFocus();
                     return;
                 }
@@ -99,7 +102,7 @@ public class CodeFragment extends Fragment {
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                Log.e("Phone", "onVerificationCompleted");
+                Log.e("Телефон: ", "по завершении проверки");
                 String code = phoneAuthCredential.getSmsCode();
                 String s = editText.getText().toString().trim();
                 if (code == s) {
@@ -109,20 +112,20 @@ public class CodeFragment extends Fragment {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
-                Log.e("Phone", "onVerificationFailed" + e.getMessage());
+                Log.e("Телефон: ", "при неудачной проверке" + e.getMessage());
             }
 
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-                Log.e("Phone", "onCodeSent");
+                Log.e("Телефон: ", "при отправке кода");
                 verificationId = s;
             }
 
             @Override
             public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
                 super.onCodeAutoRetrievalTimeOut(s);
-                Log.e("Phone", "onCodeAutoRetrievalTimeOut");
+                Log.e("Телефон: ", "при тайм-ауте автоматического восстановления кода");
             }
         };
 
@@ -140,12 +143,12 @@ public class CodeFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(requireContext(), "succes", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "успех", Toast.LENGTH_SHORT).show();
                             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
                             navController.navigate(R.id.navigation_home);
 
                         } else {
-                            Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "не смогли", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

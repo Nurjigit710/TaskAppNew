@@ -12,14 +12,14 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <TextView-->
-<!--            android:id="@+id/list_chat_left"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@color/colorPrimaryDark"-->
-<!--            android:text="text"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textColor="@color/colorWhite"/>-->
+        <TextView
+            android:id="@+id/list_chat_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:text="text"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"/>
 
     </RelativeLayout>
 
@@ -36,7 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/chat_list_style"
-            android:text="text"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="3dp"

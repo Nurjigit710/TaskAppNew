@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,12 @@ import com.example.taskapp.App;
 import com.example.taskapp.MainActivity;
 import com.example.taskapp.R;
 import com.example.taskapp.models.Task;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FormFragment extends Fragment {
 
@@ -58,11 +65,25 @@ public class FormFragment extends Fragment {
             } else {
                 task = new Task(s, System.currentTimeMillis());
                 App.getInstance().getDatabase().taskDao().insert(task);
+                saveDataToFirestore(task);
             }
             navController.navigateUp();
         } else {
             editText.setError("Заполните это поле");
         }
+    }
+
+    private void saveDataToFirestore(Task task) {
+        FirebaseFirestore.getInstance().collection("tasks").add(task).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+            @Override
+            public void onComplete(@NonNull com.google.android.gms.tasks.Task<DocumentReference> task) {
+                if (task.isSuccessful()) {
+
+                } else {
+                    Log.e("TAG", "onComplete: " + task.getException().getMessage());
+                }
+            }
+        });
     }
 
 }

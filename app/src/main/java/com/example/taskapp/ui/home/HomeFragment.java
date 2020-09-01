@@ -24,6 +24,8 @@ import com.example.taskapp.App;
 import com.example.taskapp.R;
 import com.example.taskapp.models.Task;
 import com.example.taskapp.interfaces.OnItemClickListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;

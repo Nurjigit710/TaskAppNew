@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_formFragment"
             app:destination="@id/formFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
     </fragment>
 
     <fragment
@@ -42,6 +45,24 @@
         tools:layout="@layout/fragment_board" >
         <action
             android:id="@+id/action_boardFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="com.example.taskapp.ui.auth.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone" >
+        <action
+            android:id="@+id/action_phoneFragment_to_codeFragment"
+            app:destination="@id/codeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeFragment"
+        android:name="com.example.taskapp.ui.auth.CodeFragment"
+        android:label="fragment_code"
+        tools:layout="@layout/fragment_code" >
+        <action
+            android:id="@+id/action_codeFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
 </navigation>
