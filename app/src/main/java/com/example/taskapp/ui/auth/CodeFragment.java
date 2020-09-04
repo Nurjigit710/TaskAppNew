@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -38,8 +39,6 @@ public class CodeFragment extends Fragment {
     String phoneNumber;
     TextView textView;
     CountDownTimer countDownTimer;
-    public long millisUntilFinished;
-    private boolean timerRunning;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private String verificationId;
 
@@ -50,8 +49,7 @@ public class CodeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_code, container, false);
     }
@@ -60,18 +58,17 @@ public class CodeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         textView = view.findViewById(R.id.timeCounter);
-        countDownTimer = new CountDownTimer(45000, 1000) {
+        countDownTimer = new CountDownTimer(50000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 textView.setText("Отправить код ещё раз: " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
-
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("Aza",true);
-                getParentFragmentManager().setFragmentResult("Talgar",bundle);
-                getActivity().onBackPressed();
+                bundle.putBoolean("phone4",true);
+                getParentFragmentManager().setFragmentResult("phone3",bundle);
+                requireActivity().onBackPressed();
             }
 
         }.start();
@@ -102,7 +99,7 @@ public class CodeFragment extends Fragment {
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                Log.e("Телефон: ", "по завершении проверки");
+                Log.e("phone: ", "по завершении проверки");
                 String code = phoneAuthCredential.getSmsCode();
                 String s = editText.getText().toString().trim();
                 if (code == s) {
@@ -112,20 +109,20 @@ public class CodeFragment extends Fragment {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
-                Log.e("Телефон: ", "при неудачной проверке" + e.getMessage());
+                Log.e("phone: ", "при неудачной проверке" + e.getMessage());
             }
 
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-                Log.e("Телефон: ", "при отправке кода");
+                Log.e("phone: ", "при отправке кода");
                 verificationId = s;
             }
 
             @Override
             public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
                 super.onCodeAutoRetrievalTimeOut(s);
-                Log.e("Телефон: ", "при тайм-ауте автоматического восстановления кода");
+                Log.e("phone: ", "при тайм-ауте автоматического восстановления кода");
             }
         };
 
@@ -138,15 +135,13 @@ public class CodeFragment extends Fragment {
     }
 
     private void signInWithCredential(PhoneAuthCredential credential) {
-        FirebaseAuth.getInstance().signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(requireContext(), "успех", Toast.LENGTH_SHORT).show();
                             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
                             navController.navigate(R.id.navigation_home);
-
                         } else {
                             Toast.makeText(requireContext(), "не смогли", Toast.LENGTH_SHORT).show();
                         }
@@ -157,4 +152,5 @@ public class CodeFragment extends Fragment {
     private void requestSms(String number) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(number, 60, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD, mCallbacks);
     }
+
 }

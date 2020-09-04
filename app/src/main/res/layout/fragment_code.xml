@@ -9,7 +9,7 @@
     tools:context=".ui.auth.CodeFragment">
     <EditText
         android:id="@+id/editCode"
-
+        android:inputType="number"
         android:hint="введите код"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

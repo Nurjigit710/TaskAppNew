@@ -38,8 +38,7 @@ public class PhoneFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_phone, container, false);
     }
@@ -50,10 +49,10 @@ public class PhoneFragment extends Fragment {
         editText = view.findViewById(R.id.editPhone);
         textError = view.findViewById(R.id.textError);
 
-        getParentFragmentManager().setFragmentResultListener("Talgar", getViewLifecycleOwner(), new FragmentResultListener() {
+        getParentFragmentManager().setFragmentResultListener("phone3", getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                isError = result.getBoolean("Aza");
+                isError = result.getBoolean("phone4");
                 if (isError){
                     textError.setText("Проверьте номер");
                 }
@@ -85,7 +84,7 @@ public class PhoneFragment extends Fragment {
                 requireActivity().finish();
             }
         });
-//        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+//         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 //            @Override
 //            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 //                Log.e("Phone", "onVerificationCompleted");
@@ -109,8 +108,8 @@ public class PhoneFragment extends Fragment {
 //                Log.e("Phone", "onCodeAutoRetrievalTimeOut");
 //            }
 //        };
-
-    }
+//
+//  }
 //
 //    private void signIn(PhoneAuthCredential phoneAuthCredential) {
 //        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -128,5 +127,5 @@ public class PhoneFragment extends Fragment {
 //        String phone = editText.getText().toString().trim();
 //        PhoneAuthProvider.getInstance().verifyPhoneNumber(phone, 60,
 //                TimeUnit.SECONDS, requireActivity(), mCallbacks);
-//    }
+    }
 }
